@@ -4,6 +4,9 @@ import Button from "../Forms/Button";
 import useForm from "../../Hooks/useForm";
 import { IUser, USER_POST } from "../../ApiService";
 import { UserContext } from "../../UserContext";
+import { useFetch } from "../../useFetch";
+import IUseFetchResponse from "../../Interfaces/IUseFetchResponse";
+import Error from "../Helper/Error";
 
 const LoginCreate = () => {
   const username: any = useForm("");
@@ -11,20 +14,30 @@ const LoginCreate = () => {
   const password: any = useForm("password");
 
   const { userLogin } = React.useContext<any>(UserContext);
-  // userLogin();
+  const { data, request, loading, error } = useFetch();
 
-  const handleSubmit = async (event: FormEvent): Promise<{ id: number }> => {
+  const handleSubmit = async (event: FormEvent): Promise<number> => {
     event.preventDefault();
     const body = {
       username: username.value,
       email: email.value,
       password: password.value,
     };
-    const { url, options } = USER_POST(body);
-    const response = await fetch(url, options);
-    const json = await response.json();
 
-    console.log(json);
+    /**
+     * Pega params url e options para cadastro de usuario.
+     */
+    const { url, options } = USER_POST(body);
+
+    /**
+     * Desestrura o retorno IFechResponse e informa a tipo para json
+     * Retorna um inteiro com ID do novo usuario
+     */
+    const { response, json }: IUseFetchResponse<number> = await request(
+      url,
+      options
+    );
+
     if (response.ok === true) userLogin(body.username, body.password);
 
     return json;
@@ -38,7 +51,13 @@ const LoginCreate = () => {
         <Input label="Email" type="email" name="email" {...email} />
         <Input label="Senha" type="password" name="password" {...password} />
 
-        <Button>Cadastrar</Button>
+        {loading ? (
+          <Button disabled>Cadastrando...</Button>
+        ) : (
+          <Button>Cadastrar</Button>
+        )}
+
+        <Error error={error} />
       </form>
     </section>
   );

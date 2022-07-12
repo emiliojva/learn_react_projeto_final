@@ -1,4 +1,6 @@
-import React, { Dispatch } from "react";
+import React from "react";
+import IUseFormTypes from "../Interfaces/IUseFormTypes";
+import IUseFormReturns from "../Interfaces/IUseFormReturns";
 
 export const types: IUseFormTypes = {
   email: {
@@ -61,19 +63,3 @@ const useForm = (type: string | boolean): IUseFormReturns => {
 };
 
 export default useForm;
-
-export interface IUseFormTypes {
-  [key: string]: {
-    regex: RegExp;
-    message: string;
-  };
-}
-
-export interface IUseFormReturns {
-  value: string;
-  setValue: Dispatch<string>;
-  onChange: (event: Event) => void;
-  error: string | null;
-  validate: (value: string) => boolean;
-  onBlur: () => {};
-}

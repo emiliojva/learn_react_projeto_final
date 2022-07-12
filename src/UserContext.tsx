@@ -1,7 +1,7 @@
 import React from "react";
 import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from "./ApiService";
 import { useNavigate } from "react-router-dom";
-import ErrorClass from "./Interfaces/ErrorClass";
+import IUserValidateTokenResponse from "./Interfaces/IUserValidateTokenResponse";
 
 export const UserContext = React.createContext<any>({});
 
@@ -32,14 +32,17 @@ export const UserStorage = ({ children }: any) => {
     setLogin(true);
   }
 
-  async function userLogin(username: string, password: string): Promise<any> {
+  /**
+   *  Autentica usuaário e navega para rota '/conta'
+   */
+  async function userLogin(username: string, password: string): Promise<void> {
     try {
       setError(null);
       setLoading(true);
       const { url, options } = TOKEN_POST({ username, password });
-      const tokenRes = await fetch(url, options);
+      const tokenRes: Response = await fetch(url, options);
       if (!tokenRes.ok) throw new Error(`Error: ${tokenRes.statusText}`);
-      const { token } = await tokenRes.json();
+      const { token }: IUserValidateTokenResponse = await tokenRes.json(); //
       window.localStorage.setItem("token", token);
       await getUser(token);
       navigate("/conta");
