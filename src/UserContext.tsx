@@ -8,7 +8,7 @@ export const UserContext = React.createContext<any>({});
 export const UserStorage = ({ children }: any) => {
   const [data, setData] = React.useState(null);
   const [login, setLogin] = React.useState<boolean | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean | null>(null);
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
@@ -56,15 +56,23 @@ export const UserStorage = ({ children }: any) => {
   }
 
   React.useEffect(() => {
+    console.log("userContext Effect");
     async function autoLogin() {
       const token = window.localStorage.getItem("token");
+
       if (token) {
+        console.log("meu token", token);
         try {
           setError(null);
           setLoading(true);
           const { url, options } = TOKEN_VALIDATE_POST(token);
           const response = await fetch(url, options);
-          if (!response.ok) throw new Error("Token inválido");
+          console.log("meu response", response);
+
+          if (!response.ok) {
+            throw new Error("Token inválido");
+          }
+
           await getUser(token);
         } catch (err) {
           userLogout();
