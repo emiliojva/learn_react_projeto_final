@@ -1,5 +1,5 @@
 import React from "react";
-import IFetchResponse from "./Interfaces/IUseFetchResponse";
+import IFetchResponse from "./Model/Interfaces/IUseFetchResponse";
 
 export const useFetch = () => {
   const [data, setData] = React.useState(null);

@@ -5,7 +5,7 @@ import useForm from "../../Hooks/useForm";
 import { IUser, USER_POST } from "../../ApiService";
 import { UserContext } from "../../UserContext";
 import { useFetch } from "../../useFetch";
-import IUseFetchResponse from "../../Interfaces/IUseFetchResponse";
+import IUseFetchResponse from "../../Model/Interfaces/IUseFetchResponse";
 import Error from "../Helper/Error";
 
 const LoginCreate = () => {

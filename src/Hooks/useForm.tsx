@@ -1,6 +1,6 @@
 import React from "react";
-import IUseFormTypes from "../Interfaces/IUseFormTypes";
-import IUseFormReturns from "../Interfaces/IUseFormReturns";
+import IUseFormTypes from "../Model/Interfaces/IUseFormTypes";
+import IUseFormReturns from "../Model/Interfaces/IUseFormReturns";
 
 export const types: IUseFormTypes = {
   email: {

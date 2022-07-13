@@ -1,7 +1,7 @@
 import React from "react";
 import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from "./ApiService";
 import { useNavigate } from "react-router-dom";
-import IUserValidateTokenResponse from "./Interfaces/IUserValidateTokenResponse";
+import IUserValidateTokenResponse from "./Model/Interfaces/IUserValidateTokenResponse";
 
 export const UserContext = React.createContext<any>({});
 
@@ -71,6 +71,8 @@ export const UserStorage = ({ children }: any) => {
         } finally {
           setLoading(false);
         }
+      } else {
+        setLogin(false);
       }
     }
     autoLogin();
