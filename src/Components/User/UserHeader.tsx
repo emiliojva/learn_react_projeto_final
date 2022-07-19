@@ -4,30 +4,31 @@ import styles from "./UserHeader.module.css";
 import { useLocation } from "react-router-dom";
 
 const UserHeader = () => {
-  const [title, setTitle] = React.useState<null | string>(null); // Genericamente o valor pode ser null ou string
+  /*Alterações de estado do titulo do dashboard */
+  const [title, setTitle] = React.useState<null | string>("Minhas fotos"); // Genericamente o valor pode ser null ou string
 
   const location: any = useLocation();
 
   React.useEffect(() => {
     const { pathname } = location;
-    console.log("rota atual", pathname);
 
-    let titulo = "Minhas fotos";
+    /*Switch titulo do dashboard da /conta  */
     switch (pathname) {
       case "/conta/estatiticas":
-        titulo = "Estatísticas";
+        setTitle("Estatísticas");
         break;
       case "/conta/postar":
-        titulo = "Adicionar Foto";
+        setTitle("Adicionar Foto");
         break;
+      default:
+        setTitle("Minhas fotos");
     }
-
-    setTitle(titulo);
   }, [location]);
 
   return (
     <header className={styles.header}>
       <h1 className="title">{title}</h1>
+      {/* Header Nav da Página User/Conta */}
       <UserHeaderNav />
     </header>
   );

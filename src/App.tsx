@@ -6,10 +6,9 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 import Login from "./Components/Login/Login";
-import { UserContext, UserStorage } from "./UserContext";
+import { UserStorage } from "./UserContext";
 import ProtectedRoute from "./Components/Helper/ProtectedRoute";
 import PageUser from "./Components/User/PageUser";
-import IUserContextReturn from "./Model/Interfaces/IUserContextReturn";
 
 function App() {
   return (

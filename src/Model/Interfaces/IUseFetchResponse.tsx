@@ -3,6 +3,6 @@
  * Por isso generalizamos com o token T;
  */
 export default interface IUseFetchResponse<T> {
-  response: Response;
+  response: Response | null;
   json: T;
 }

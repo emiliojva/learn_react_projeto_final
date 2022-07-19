@@ -1,0 +1,20 @@
+.feed {
+  display: grid; /* https://www.w3schools.com/css/css_grid.asp */
+  grid-template-columns: repeat(3, 1fr);;
+  gap: 1rem;
+  margin-bottom: 1rem; 
+  justify-items: center; /* Explorar espaços e redimensionar items da grid  ao centro */
+}
+
+@media (max-width: 40rem) {
+  .feed {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+
+@media (max-width: 20rem) {
+  .feed {
+    grid-template-columns: 1fr;
+  }
+}

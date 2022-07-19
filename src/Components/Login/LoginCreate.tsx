@@ -2,10 +2,9 @@ import React, { FormEvent } from "react";
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import useForm from "../../Hooks/useForm";
-import { IUser, USER_POST } from "../../ApiService";
+import { USER_POST } from "../../ApiService";
 import { UserContext } from "../../UserContext";
 import { useFetch } from "../../useFetch";
-import IUseFetchResponse from "../../Model/Interfaces/IUseFetchResponse";
 import Error from "../Helper/Error";
 
 const LoginCreate = () => {
@@ -16,7 +15,7 @@ const LoginCreate = () => {
   const { userLogin } = React.useContext<any>(UserContext);
   const { data, request, loading, error } = useFetch();
 
-  const handleSubmit = async (event: FormEvent): Promise<number> => {
+  const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     const body = {
       username: username.value,
@@ -33,14 +32,10 @@ const LoginCreate = () => {
      * Desestrura o retorno IFechResponse e informa a tipo para json
      * Retorna um inteiro com ID do novo usuario
      */
-    const { response, json }: IUseFetchResponse<number> = await request(
-      url,
-      options
-    );
+    const { response } = await request<number>(url, options);
 
-    if (response.ok === true) userLogin(body.username, body.password);
-
-    return json;
+    if (response && response.ok === true)
+      userLogin(body.username, body.password);
   };
 
   return (

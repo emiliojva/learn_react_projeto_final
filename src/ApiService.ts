@@ -51,6 +51,19 @@ export function USER_POST(body: IUser) {
 }
 
 
+export function PHOTOS_GET({page,total,user}:{page:number,total:number,user:number} ) {
+  return {
+    url: API_URL + `/api/photo/?_page=${page}&_total=${total}&_user=${user}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+      // headers: {
+      //   Authorization: 'Bearer ' + token,
+      // },
+    },
+  };
+}
+
 export interface IUser {
   username:string;
   email:string;

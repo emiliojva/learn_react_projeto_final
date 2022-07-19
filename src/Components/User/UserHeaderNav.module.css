@@ -42,6 +42,31 @@ Estilizar tags dentro do svg
   <rect x="20" y="6" width="2" height="16" rx="1" fill="#333"/>
 </svg>
 */
-.nav a:global(.active) svg > *{
+.nav a:global(.active) svg > * { 
   fill: #fb1;
+}
+
+
+.mobileButton {
+  background-color: #eee;
+  border-radius: 0.2rem;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.mobileButton::after{
+  content: '';
+  display: block;
+  width: 1.2rem;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  box-shadow: 0px -6px black, 0px 6px black; /* sintax básica offset-x | offset-y | color */
 }
